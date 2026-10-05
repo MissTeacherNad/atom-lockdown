@@ -1,53 +1,384 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#10263d">
-<title>Atom Lockdown | Miss Yahia</title>
-<style>
-:root{--navy:#10263d;--ink:#19384e;--blue:#287cc1;--paper:#f3f7fa;--line:#c7d9e4;--green:#16804f;--red:#b23a3a;--amber:#f0b94b}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
-header{background:var(--navy);color:white;padding:18px max(20px,calc((100vw - 1040px)/2));display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{letter-spacing:.12em;font-size:.78rem;font-weight:800}.brand b{display:block;letter-spacing:.02em;font-size:1.15rem}.clock{font-variant-numeric:tabular-nums;background:#26445d;border:1px solid #527086;padding:7px 12px;border-radius:8px;white-space:nowrap}
-main{max-width:1040px;margin:auto;padding:26px 20px 70px}.hero{border:1px solid var(--line);background:white;border-radius:16px;padding:clamp(22px,4vw,42px);box-shadow:0 9px 28px #10263d12}.eyebrow{text-transform:uppercase;font-weight:800;letter-spacing:.14em;color:var(--blue);font-size:.75rem}h1{font-size:clamp(2.2rem,5vw,4.2rem);letter-spacing:-.045em;line-height:1.02;margin:10px 0 18px;color:var(--navy)}h2{font-size:1.55rem;margin:0 0 8px}h3{font-size:1.05rem;margin:24px 0 8px}p{margin:8px 0 16px}.intro{max-width:65ch;font-size:1.08rem}.banner{background:#e5f0f7;border-left:4px solid var(--blue);padding:14px 18px;border-radius:6px;margin:20px 0}.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.btn{border:0;border-radius:9px;padding:11px 17px;font-weight:750;background:var(--blue);color:white;min-height:44px}.btn:hover{filter:brightness(.92)}.btn.secondary{background:white;color:var(--ink);border:1px solid #7896aa}.btn.small{font-size:.9rem;padding:8px 12px}.btn:disabled{opacity:.45;cursor:not-allowed}
-.progress{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:22px 0}.step{border:1px solid var(--line);border-radius:10px;padding:10px;background:white;font-size:.84rem}.step.current{border:2px solid var(--blue)}.step.done{background:#e2f3e9;border-color:#76bc93}.step b{display:block;font-size:.74rem;text-transform:uppercase;letter-spacing:.08em}.layout{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:18px;margin-top:18px}.panel,.side{background:white;border:1px solid var(--line);border-radius:14px;padding:clamp(18px,3vw,28px)}.side{align-self:start}.case{display:inline-block;background:var(--navy);color:white;border-radius:5px;padding:3px 9px;text-transform:uppercase;letter-spacing:.1em;font-size:.73rem;font-weight:800}.question{border-top:1px solid var(--line);padding:18px 0}.question:first-of-type{border-top:0}.question p{font-weight:700;margin:0 0 11px}.choices{display:grid;gap:8px}.choice{display:block;position:relative}.choice input{position:absolute;opacity:0}.choice span{display:block;border:1.5px solid #adc4d2;border-radius:9px;padding:10px 13px;background:#fff;cursor:pointer}.choice input:checked+span{border-color:var(--blue);background:#e9f4fd;box-shadow:inset 0 0 0 1px var(--blue)}.choice input:focus-visible+span{outline:3px solid var(--amber)}.feedback{min-height:1.6em;font-weight:700;margin:10px 0;color:var(--red)}.feedback.ok{color:var(--green)}.hint{background:#fff7e5;border:1px solid #e9c778;border-radius:8px;padding:11px 13px;margin-top:12px}.hint summary{cursor:pointer;font-weight:750}.fragment{font-size:2.4rem;line-height:1;font-weight:900;color:var(--green);border:2px dashed #7bbb96;border-radius:10px;background:#eff8f1;padding:17px;margin:16px 0}.fragment span{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:7px}.formula{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:800;background:#ebf3f8;border-radius:5px;padding:2px 5px}.glossary{font-size:.92rem}.glossary dt{font-weight:800;margin-top:11px}.glossary dd{margin-left:0}.code-input{width:100%;max-width:240px;text-align:center;font-size:2rem;letter-spacing:.25em;font-weight:800;border:2px solid #7293a7;border-radius:10px;padding:8px 10px;margin:8px 0 14px}.muted{color:#526c7e}.status{color:var(--green);font-weight:800}.footer{font-size:.82rem;color:#526c7e;margin-top:30px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:740px){.layout{grid-template-columns:1fr}.progress{grid-template-columns:repeat(2,1fr)}header{padding:14px 20px}}@media(prefers-reduced-motion:no-preference){.panel{animation:appear .25s ease-out}@keyframes appear{from{opacity:.5;transform:translateY(6px)}to{opacity:1;transform:none}}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#10253f">
+  <title>Atom Lockdown · Periodic Table Challenge</title>
+  <style>
+    :root {
+      --ink: #10253f;
+      --denim: #234f78;
+      --sky: #dcebf5;
+      --paper: #f7f4ed;
+      --white: #fff;
+      --orange: #e98232;
+      --green: #287a55;
+      --red: #b64b4b;
+      --line: rgba(16,37,63,.18);
+      --shadow: 0 12px 34px rgba(16,37,63,.14);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Futura, "Avenir Next", Avenir, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(255,255,255,.72), rgba(255,255,255,.72)),
+        repeating-linear-gradient(0deg, transparent 0 29px, rgba(35,79,120,.08) 29px 30px),
+        var(--paper);
+      -webkit-tap-highlight-color: transparent;
+    }
+    button, select, input { font: inherit; }
+    button { cursor: pointer; touch-action: manipulation; }
+    .app { width: min(1180px, 100%); margin: 0 auto; padding: 18px clamp(14px, 3vw, 34px) 24px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 16px; }
+    .eyebrow { color: var(--denim); font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 3px 0 0; font-size: clamp(1.55rem, 4vw, 2.6rem); line-height: 1; }
+    .header-actions { display: flex; gap: 8px; }
+    .icon-btn, .small-btn {
+      border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.8);
+      color: var(--ink); min-height: 44px; padding: 9px 13px; font-weight: 750;
+    }
+    .setup, .game-card, .scoreboard, .progress-card {
+      border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.9); box-shadow: var(--shadow);
+    }
+    .setup { padding: clamp(18px, 4vw, 34px); }
+    .period-choices { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 9px; margin: 12px 0 15px; }
+    .period-option { text-align: left; padding: 13px; min-height: 86px; border: 2px solid var(--line); border-radius: 13px; background: var(--white); color: var(--ink); }
+    .period-option[aria-pressed="true"] { border-color: var(--denim); background: #eaf3f9; }
+    .period-option strong, .period-option small { display: block; }
+    .period-option small { color: #52677a; font-size: .75rem; margin-top: 5px; }
+    button:focus-visible,select:focus-visible,input:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+    @media(max-width:680px){.period-choices{grid-template-columns:1fr}}
+    .setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .section-title { margin: 0 0 6px; font-size: 1.05rem; }
+    .hint { margin: 0 0 15px; color: #53677b; line-height: 1.45; }
+    label { display: block; margin: 12px 0 6px; font-size: .84rem; font-weight: 800; color: var(--denim); }
+    select, .team-name {
+      width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 12px;
+      background: var(--white); color: var(--ink); padding: 10px 12px;
+    }
+    .name-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .name-grid label { margin-top: 0; }
+    .start-btn {
+      width: 100%; margin-top: 24px; min-height: 58px; border: 0; border-radius: 15px;
+      background: var(--ink); color: var(--white); font-size: 1.05rem; font-weight: 900; letter-spacing: .04em;
+      box-shadow: 0 8px 0 #071728;
+    }
+    .start-btn:active { transform: translateY(4px); box-shadow: 0 4px 0 #071728; }
+    .game { display: none; }
+    .game.on { display: block; }
+    .setup.off { display: none; }
+    .scoreboard { padding: 10px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }
+    .team {
+      position: relative; min-height: 94px; border: 2px solid transparent; border-radius: 14px;
+      background: #eef3f7; padding: 10px 9px; text-align: center; transition: .18s ease;
+    }
+    .team.active { border-color: var(--orange); background: #fff4e9; transform: translateY(-2px); }
+    .team.active::before { content: "PLAYING"; position: absolute; top: -9px; left: 50%; transform: translateX(-50%); background: var(--orange); color: white; border-radius: 999px; padding: 2px 8px; font-size: .58rem; font-weight: 900; letter-spacing: .08em; }
+    .team-name-display { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: .8rem; font-weight: 850; color: var(--denim); }
+    .score { display: block; margin-top: 2px; font-size: 2rem; font-weight: 950; line-height: 1; }
+    .streak { font-size: .7rem; color: #63778a; }
+    .play-grid { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 14px; }
+    .game-card { min-height: 440px; padding: clamp(20px, 5vw, 46px); display: flex; flex-direction: column; justify-content: center; text-align: center; overflow: hidden; position: relative; }
+    .game-card::after { content: ""; position: absolute; width: 180px; height: 180px; right: -90px; top: -90px; border: 28px solid var(--sky); border-radius: 50%; opacity: .8; }
+    .round-label { color: var(--denim); font-size: .74rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .question { margin: 19px auto 8px; font-size: clamp(2.2rem, 7vw, 5rem); font-weight: 950; line-height: 1; max-width: 900px; }
+    .instruction { color: #53677b; font-size: clamp(.95rem, 2vw, 1.18rem); }
+    .answer-box { min-height: 78px; margin: 24px auto 5px; display: flex; align-items: center; justify-content: center; }
+    .answer {
+      display: none; border: 2px solid rgba(40,122,85,.28); border-radius: 16px; background: #eaf6ef;
+      color: var(--green); padding: 13px 22px; font-size: clamp(1.45rem, 4vw, 2.4rem); font-weight: 950;
+    }
+    .answer.show { display: block; animation: pop .22s ease-out; }
+    @keyframes pop { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: scale(1); } }
+    .action-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .action {
+      min-height: 54px; border-radius: 14px; padding: 11px 20px; border: 0; font-weight: 900;
+    }
+    .reveal { background: var(--denim); color: white; min-width: 190px; }
+    .correct { background: var(--green); color: white; }
+    .wrong { background: var(--red); color: white; }
+    .skip { background: #e7edf2; color: var(--ink); }
+    .judgement { display: none; }
+    .judgement.show { display: inline-flex; }
+    .side { display: flex; flex-direction: column; gap: 14px; }
+    .progress-card { padding: 18px; }
+    .counter { font-size: 2rem; font-weight: 950; }
+    .progress-track { height: 9px; background: #e2e9ee; border-radius: 999px; overflow: hidden; margin: 9px 0 14px; }
+    .progress-fill { width: 0; height: 100%; background: var(--orange); transition: width .25s ease; }
+    .legend { margin: 0; padding-left: 18px; color: #53677b; font-size: .79rem; line-height: 1.55; }
+    .side .small-btn { width: 100%; }
+    .bonus-note { min-height: 44px; margin-top: 12px; color: var(--orange); font-weight: 900; font-size: .9rem; }
+    footer { margin-top: 14px; text-align: center; color: #617386; font-size: .72rem; }
+    .modal { display: none; position: fixed; inset: 0; z-index: 10; background: rgba(7,23,40,.72); padding: 18px; align-items: center; justify-content: center; }
+    .modal.open { display: flex; }
+    .modal-card { width: min(690px, 100%); max-height: 88vh; overflow: auto; border-radius: 20px; background: var(--paper); padding: clamp(20px, 5vw, 36px); box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+    .modal-card h2 { margin-top: 0; }
+    .modal-card ol { line-height: 1.6; padding-left: 22px; }
+    .close { float: right; }
+    .end-title { font-size: clamp(2rem, 7vw, 4rem); margin: 12px 0; }
+    .winner { color: var(--orange); }
+    @media (max-width: 780px) {
+      .setup-grid, .play-grid { grid-template-columns: 1fr; }
+      .side { display: grid; grid-template-columns: 1fr 1fr; }
+      .scoreboard { grid-template-columns: 1fr 1fr; }
+      .game-card { min-height: 370px; }
+    }
+    @media (max-width: 470px) {
+      header { align-items: flex-start; }
+      .eyebrow { font-size: .64rem; }
+      .header-actions .text { display: none; }
+      .name-grid { grid-template-columns: 1fr; }
+      .side { grid-template-columns: 1fr; }
+      .scoreboard { gap: 5px; padding: 6px; }
+      .team { min-height: 82px; padding: 9px 5px; }
+      .score { font-size: 1.6rem; }
+    }
+  </style>
 </head>
-<body><header><div class="brand">DNL · PHYSICS & CHEMISTRY<b>ATOM LOCKDOWN</b></div><div class="clock" aria-label="Elapsed time">⏱ <span id="timer">00:00</span></div></header><main><div id="app"></div><footer class="footer">Miss Yahia · 26/27 · No account or personal data required. Progress stays on this device.</footer></main>
-<script>
-(() => {
-'use strict';
-const KEY='atom-lockdown-yahia-v1';
-const missions=[
- {label:'01 · LAB ENGLISH',title:'The laboratory archive',lead:'The safety system has scrambled its English labels. Identify the correct scientific terms.',questions:[
-  {q:'Which part of an atom contains protons and neutrons?',options:['electron cloud','nucleus','element'],answer:1,explain:'The nucleus contains protons and neutrons.'},
-  {q:'Which two particles are nucleons?',options:['protons and electrons','neutrons and electrons','protons and neutrons'],answer:2,explain:'Nucleons are the particles in the nucleus: protons and neutrons.'},
-  {q:'What is a chemical element defined by?',options:['its number of protons','its number of neutrons','its number of electrons'],answer:0,explain:'The number of protons identifies the element.'}
- ],fragment:'2',derive:'Count the TWO types of nucleon: proton and neutron.',hint:'Nucleons are inside the nucleus. Electrons are outside it.'},
- {label:'02 · NUCLEUS DATA',title:'Repair the oxygen record',lead:'An oxygen-16 atom has atomic number Z = 8 and mass number A = 16. It is neutral.',questions:[
-  {q:'How many protons are in oxygen-16?',options:['8','16','24'],answer:0,explain:'Z is the number of protons, so p⁺ = 8.'},
-  {q:'How many neutrons are in oxygen-16?',options:['16','8','24'],answer:1,explain:'n = A − Z = 16 − 8 = 8.'},
-  {q:'How many electrons does this neutral atom have?',options:['16','8','0'],answer:1,explain:'A neutral atom has as many electrons as protons: 8.'}
- ],fragment:'8',derive:'The fragment is the number of neutrons in oxygen-16.',hint:'Z = protons. A = protons + neutrons. A neutral atom has e⁻ = p⁺.'},
- {label:'03 · CHARGE ALERT',title:'Track the missing electron',lead:'A neutral sodium-23 atom has 11 protons and 11 electrons. The system detects a sodium ion Na⁺ with 11 protons and 10 electrons.',questions:[
-  {q:'What changed when the neutral atom became Na⁺?',options:['one proton was lost','one neutron was lost','one electron was lost'],answer:2,explain:'Na⁺ forms when a sodium atom loses one electron.'},
-  {q:'What stayed the same?',options:['the number of protons','the number of electrons','the overall charge'],answer:0,explain:'Its 11 protons remain unchanged, so it is still sodium.'},
-  {q:'How many neutrons does sodium-23 have?',options:['23','12','11'],answer:1,explain:'n = A − Z = 23 − 11 = 12.'}
- ],fragment:'1',derive:'The fragment is the number of electrons lost to form Na⁺.',hint:'A positive ion has lost electrons. For sodium-23, A = 23 and Z = 11.'},
- {label:'04 · ISOTOPE FILE',title:'Compare the carbon samples',lead:'Carbon-12 and carbon-14 each contain 6 protons. Their mass numbers are 12 and 14.',questions:[
-  {q:'How many neutrons does carbon-12 have?',options:['6','12','18'],answer:0,explain:'n = 12 − 6 = 6.'},
-  {q:'How many neutrons does carbon-14 have?',options:['6','8','14'],answer:1,explain:'n = 14 − 6 = 8.'},
-  {q:'Why are they isotopes of the same element?',options:['same electrons, different protons','same protons, different neutrons','same neutrons, different protons'],answer:1,explain:'Both have Z = 6, but their neutron numbers differ.'}
- ],fragment:'2',derive:'The fragment is the DIFFERENCE between their neutron counts: 8 − 6.',hint:'For each isotope, subtract Z from A. Isotopes have the same protons.'}
-];
-let saved;try{saved=JSON.parse(localStorage.getItem(KEY)||'null')}catch{};
-let state={stage:0,fragments:[],started:Date.now(),finished:false,...(saved&&typeof saved==='object'?saved:{})};
-state.stage=Math.min(4,Math.max(0,Number(state.stage)||0));state.fragments=Array.isArray(state.fragments)?state.fragments.slice(0,4):[];
-const app=document.getElementById('app');const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}};
-const glossary=`<div class="side"><h3>Field notes · vocabulary</h3><dl class="glossary"><dt>atom · atome</dt><dd>One unit of a chemical element.</dd><dt>nucleus · noyau</dt><dd>The centre, containing protons and neutrons.</dd><dt>nucleon · nucléon</dt><dd>A proton or a neutron.</dd><dt>Z · atomic number</dt><dd>Number of protons.</dd><dt>A · mass number</dt><dd>Protons + neutrons in one nucleus.</dd><dt>neutral atom</dt><dd>Electrons = protons.</dd><dt>ion</dt><dd>Electrons gained or lost.</dd><dt>isotope</dt><dd>Same protons, different neutrons.</dd></dl><p class="muted">Use <span class="formula">n = A − Z</span>. The decimal atomic mass on a periodic table is a different quantity.</p></div>`;
-function progress(){return `<nav class="progress" aria-label="Mission progress">${missions.map((m,i)=>`<div class="step ${i<state.stage?'done':i===state.stage?'current':''}"><b>${i<state.stage?'Verified':i===state.stage?'Active':'Locked'}</b>${esc(m.label)}</div>`).join('')}</nav>`}
-function shell(content){app.innerHTML=`<div class="hero"><div class="eyebrow">Laboratory incident · 45 minute class mission</div><h1>Atom Lockdown</h1><p class="intro">Four damaged records. Four data fragments. Restore the lab archive before the lockdown protocol completes.</p><div class="banner">Work in pairs. Read the field notes if needed. Check each record, collect its fragment, then enter the four digits in mission order.</div><div class="row"><button class="btn secondary small" id="restart">Start again</button><span class="muted">${state.stage===4?'All records verified':`${state.stage} of 4 records verified`}</span></div></div>${progress()}<div class="layout"><section class="panel" id="mission">${content}</section>${glossary}</div>`;document.getElementById('restart').onclick=()=>{if(confirm('Erase progress on this device and start again?')){state={stage:0,fragments:[],started:Date.now(),finished:false};save();render()}}}
-function render(){if(state.stage===4){final();return}const m=missions[state.stage];shell(`<span class="case">Data file ${state.stage+1} / 4</span><h2 style="margin-top:12px">${esc(m.title)}</h2><p>${esc(m.lead)}</p><form id="missionForm">${m.questions.map((q,j)=>`<div class="question"><p>${j+1}. ${esc(q.q)}</p><div class="choices">${q.options.map((o,k)=>`<label class="choice"><input type="radio" name="q${j}" value="${k}" required><span>${esc(o)}</span></label>`).join('')}</div></div>`).join('')}<details class="hint"><summary>Need a hint?</summary><p>${esc(m.hint)}</p></details><p id="feedback" class="feedback" role="status" aria-live="polite"></p><button class="btn" type="submit">Verify this file</button></form>`);document.getElementById('missionForm').onsubmit=e=>{e.preventDefault();let answers=m.questions.map((_,j)=>document.querySelector(`input[name=q${j}]:checked`));let f=document.getElementById('feedback');if(answers.some(v=>!v)){f.textContent='Answer all three questions first.';return}let wrong=answers.findIndex((v,j)=>Number(v.value)!==m.questions[j].answer);if(wrong>=0){f.classList.remove('ok');f.textContent=`Check answer ${wrong+1}. ${m.questions[wrong].explain}`;return}f.classList.add('ok');f.textContent='File verified.';document.getElementById('mission').innerHTML=`<span class="case">Verified file ${state.stage+1}</span><h2 style="margin-top:12px">Data fragment recovered</h2><p>${esc(m.derive)}</p><div class="fragment"><span>Fragment ${state.stage+1}</span>${m.fragment}</div><p class="status">Correct. Write this digit down or keep this page open.</p><button class="btn" id="next">${state.stage===3?'Go to final lock':'Open next file'}</button>`;document.getElementById('next').onclick=()=>{state.fragments[state.stage]=m.fragment;state.stage++;save();render()}}}
-function final(){shell(`<span class="case">Final lock</span><h2 style="margin-top:12px">Restore the archive</h2><p>Enter the four fragments in mission order. Each digit was obtained from your scientific answers.</p><div class="row">${state.fragments.map((v,i)=>`<div class="step done"><b>File ${i+1}</b>${esc(v)}</div>`).join('')}</div>${state.finished?`<div class="fragment"><span>Archive status</span>OPEN</div><p class="status">Lockdown lifted. All four files restored.</p><p>Final check: Z identifies an element, A counts nucleons, an ion changes electrons, and isotopes differ in neutrons.</p>`:`<form id="lockForm"><label for="code"><h3>Four digit access code</h3></label><input class="code-input" id="code" type="text" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off" required aria-describedby="lockfeedback"><div><button class="btn" type="submit">Unlock archive</button></div><p class="feedback" id="lockfeedback" role="status" aria-live="polite"></p></form>`}<p class="muted">Finished early? Explain to your partner why Na⁺ is still sodium and why carbon-12 and carbon-14 are both carbon.</p>`);let form=document.getElementById('lockForm');if(form)form.onsubmit=e=>{e.preventDefault();let code=document.getElementById('code').value.trim();if(code===state.fragments.join('')){state.finished=true;save();final()}else document.getElementById('lockfeedback').textContent='The digits are correct only in file order. Check your four fragments.'}}
-function tick(){let n=Math.max(0,Math.floor((Date.now()-state.started)/1000));document.getElementById('timer').textContent=`${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`}render();tick();setInterval(tick,1000);
-})();
-</script></body></html>
+<body>
+  <main class="app">
+    <header>
+      <div>
+        <div class="eyebrow">DNL Physics &amp; Chemistry · Première</div>
+        <h1>Atom Lockdown</h1>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" id="helpBtn" aria-label="How to play">? <span class="text">How to play</span></button>
+        <button class="icon-btn" id="fullBtn" aria-label="Full screen">⛶ <span class="text">Full screen</span></button>
+      </div>
+    </header>
+
+    <section class="setup" id="setup">
+      <div class="setup-grid">
+        <div>
+          <h2 class="section-title">1. Choose the periods</h2>
+          <div class="period-choices" role="group" aria-label="Which periods?">
+            <button class="period-option" type="button" data-range="first" aria-pressed="true"><strong>Periods 1–3</strong><small>H–Ar · 18 elements</small></button>
+            <button class="period-option" type="button" data-range="next" aria-pressed="false"><strong>Periods 4–6</strong><small>K–Rn · 68 elements</small></button>
+            <button class="period-option" type="button" data-range="six" aria-pressed="false"><strong>Periods 1–6</strong><small>H–Rn · 86 elements</small></button>
+          </div>
+          <p class="hint" id="rangeHint">Questions from the first 18 elements.</p>
+          <label for="roundSelect">Round type</label>
+          <select id="roundSelect">
+            <option value="mixed">Mixed Challenge</option>
+            <option value="name-symbol">Name → Symbol</option>
+            <option value="symbol-name">Symbol → Name</option>
+            <option value="number-element">Atomic Number → Symbol + Name</option>
+            <option value="triple">Triple Challenge</option>
+            <option value="family">Element → Family</option>
+          </select>
+          <label for="questionCount">Number of questions</label>
+          <select id="questionCount">
+            <option value="12">12 questions · 3 turns per team</option>
+            <option value="16">16 questions · 4 turns per team</option>
+            <option value="8">8 questions · 2 turns per team</option>
+            <option value="all" id="allCount">All 18 elements · long round</option>
+          </select>
+        </div>
+        <div>
+          <h2 class="section-title">2. Name the teams</h2>
+          <p class="hint">Keep the suggested names or personalise them.</p>
+          <div class="name-grid">
+            <label>Team 1<input class="team-name" value="Team Alpha" maxlength="18"></label>
+            <label>Team 2<input class="team-name" value="Team Beta" maxlength="18"></label>
+            <label>Team 3<input class="team-name" value="Team Gamma" maxlength="18"></label>
+            <label>Team 4<input class="team-name" value="Team Delta" maxlength="18"></label>
+          </div>
+        </div>
+      </div>
+      <button class="start-btn" id="startBtn">START THE CHALLENGE</button>
+    </section>
+
+    <section class="game" id="game">
+      <div class="scoreboard" id="scoreboard"></div>
+      <div class="play-grid">
+        <section class="game-card">
+          <div class="round-label" id="roundLabel"></div>
+          <div class="question" id="question"></div>
+          <div class="instruction" id="instruction"></div>
+          <div class="answer-box"><div class="answer" id="answer"></div></div>
+          <div class="action-row">
+            <button class="action reveal" id="revealBtn">REVEAL ANSWER</button>
+            <button class="action correct judgement" id="correctBtn">✓ CORRECT</button>
+            <button class="action wrong judgement" id="wrongBtn">✕ INCORRECT</button>
+            <button class="action skip" id="skipBtn">SKIP</button>
+          </div>
+        </section>
+        <aside class="side">
+          <section class="progress-card">
+            <div class="eyebrow">Progress</div>
+            <div class="counter"><span id="currentNumber">1</span> / <span id="totalNumber">18</span></div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+            <ul class="legend">
+              <li>Correct answer: +1 point</li>
+              <li>3 correct in a row: +1 bonus</li>
+              <li>Teams play in turn</li>
+            </ul>
+            <div class="bonus-note" id="bonusNote"></div>
+          </section>
+          <button class="small-btn" id="changeTeamBtn">Change active team</button>
+          <button class="small-btn" id="newGameBtn">New game</button>
+        </aside>
+      </div>
+    </section>
+    <footer>Miss Yahia · DNL Physics &amp; Chemistry · 2026–2027</footer>
+  </main>
+
+  <div class="modal" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div class="modal-card">
+      <button class="small-btn close" data-close="helpModal">Close</button>
+      <h2 id="helpTitle">How to play</h2>
+      <ol>
+        <li>Divide the class into four teams and choose a round.</li>
+        <li>The highlighted team answers the question orally.</li>
+        <li>Tap <strong>Reveal answer</strong>, then <strong>Correct</strong> or <strong>Incorrect</strong>.</li>
+        <li>The next team is selected automatically. Three correct answers in a row earn one bonus point.</li>
+        <li>At the end, the team with the highest score wins.</li>
+      </ol>
+      <p><strong>Triple Challenge:</strong> students receive one piece of information and must give the other two. The family round asks for the English family name.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="endModal" role="dialog" aria-modal="true" aria-labelledby="endTitle">
+    <div class="modal-card" style="text-align:center">
+      <div class="eyebrow">Round complete</div>
+      <h2 class="end-title" id="endTitle">Final scores</h2>
+      <div id="winnerText" class="winner" style="font-size:1.5rem;font-weight:950"></div>
+      <div id="finalScores" style="margin:22px 0;line-height:1.8"></div>
+      <button class="start-btn" id="playAgainBtn">PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <script>
+  (() => {
+    const elements = [{"z":1,"s":"H","n":"Hydrogen","p":1,"f":"Nonmetal"},{"z":2,"s":"He","n":"Helium","p":1,"f":"Noble gas"},{"z":3,"s":"Li","n":"Lithium","p":2,"f":"Alkali metal"},{"z":4,"s":"Be","n":"Beryllium","p":2,"f":"Alkaline earth metal"},{"z":5,"s":"B","n":"Boron","p":2,"f":"Metalloid"},{"z":6,"s":"C","n":"Carbon","p":2,"f":"Nonmetal"},{"z":7,"s":"N","n":"Nitrogen","p":2,"f":"Nonmetal"},{"z":8,"s":"O","n":"Oxygen","p":2,"f":"Nonmetal"},{"z":9,"s":"F","n":"Fluorine","p":2,"f":"Halogen"},{"z":10,"s":"Ne","n":"Neon","p":2,"f":"Noble gas"},{"z":11,"s":"Na","n":"Sodium","p":3,"f":"Alkali metal"},{"z":12,"s":"Mg","n":"Magnesium","p":3,"f":"Alkaline earth metal"},{"z":13,"s":"Al","n":"Aluminium","p":3,"f":"Post-transition metal"},{"z":14,"s":"Si","n":"Silicon","p":3,"f":"Metalloid"},{"z":15,"s":"P","n":"Phosphorus","p":3,"f":"Nonmetal"},{"z":16,"s":"S","n":"Sulfur","p":3,"f":"Nonmetal"},{"z":17,"s":"Cl","n":"Chlorine","p":3,"f":"Halogen"},{"z":18,"s":"Ar","n":"Argon","p":3,"f":"Noble gas"},{"z":19,"s":"K","n":"Potassium","p":4,"f":"Alkali metal"},{"z":20,"s":"Ca","n":"Calcium","p":4,"f":"Alkaline earth metal"},{"z":21,"s":"Sc","n":"Scandium","p":4,"f":"Transition metal"},{"z":22,"s":"Ti","n":"Titanium","p":4,"f":"Transition metal"},{"z":23,"s":"V","n":"Vanadium","p":4,"f":"Transition metal"},{"z":24,"s":"Cr","n":"Chromium","p":4,"f":"Transition metal"},{"z":25,"s":"Mn","n":"Manganese","p":4,"f":"Transition metal"},{"z":26,"s":"Fe","n":"Iron","p":4,"f":"Transition metal"},{"z":27,"s":"Co","n":"Cobalt","p":4,"f":"Transition metal"},{"z":28,"s":"Ni","n":"Nickel","p":4,"f":"Transition metal"},{"z":29,"s":"Cu","n":"Copper","p":4,"f":"Transition metal"},{"z":30,"s":"Zn","n":"Zinc","p":4,"f":"Transition metal"},{"z":31,"s":"Ga","n":"Gallium","p":4,"f":"Post-transition metal"},{"z":32,"s":"Ge","n":"Germanium","p":4,"f":"Metalloid"},{"z":33,"s":"As","n":"Arsenic","p":4,"f":"Metalloid"},{"z":34,"s":"Se","n":"Selenium","p":4,"f":"Nonmetal"},{"z":35,"s":"Br","n":"Bromine","p":4,"f":"Halogen"},{"z":36,"s":"Kr","n":"Krypton","p":4,"f":"Noble gas"},{"z":37,"s":"Rb","n":"Rubidium","p":5,"f":"Alkali metal"},{"z":38,"s":"Sr","n":"Strontium","p":5,"f":"Alkaline earth metal"},{"z":39,"s":"Y","n":"Yttrium","p":5,"f":"Transition metal"},{"z":40,"s":"Zr","n":"Zirconium","p":5,"f":"Transition metal"},{"z":41,"s":"Nb","n":"Niobium","p":5,"f":"Transition metal"},{"z":42,"s":"Mo","n":"Molybdenum","p":5,"f":"Transition metal"},{"z":43,"s":"Tc","n":"Technetium","p":5,"f":"Transition metal"},{"z":44,"s":"Ru","n":"Ruthenium","p":5,"f":"Transition metal"},{"z":45,"s":"Rh","n":"Rhodium","p":5,"f":"Transition metal"},{"z":46,"s":"Pd","n":"Palladium","p":5,"f":"Transition metal"},{"z":47,"s":"Ag","n":"Silver","p":5,"f":"Transition metal"},{"z":48,"s":"Cd","n":"Cadmium","p":5,"f":"Transition metal"},{"z":49,"s":"In","n":"Indium","p":5,"f":"Post-transition metal"},{"z":50,"s":"Sn","n":"Tin","p":5,"f":"Post-transition metal"},{"z":51,"s":"Sb","n":"Antimony","p":5,"f":"Metalloid"},{"z":52,"s":"Te","n":"Tellurium","p":5,"f":"Metalloid"},{"z":53,"s":"I","n":"Iodine","p":5,"f":"Halogen"},{"z":54,"s":"Xe","n":"Xenon","p":5,"f":"Noble gas"},{"z":55,"s":"Cs","n":"Caesium","p":6,"f":"Alkali metal"},{"z":56,"s":"Ba","n":"Barium","p":6,"f":"Alkaline earth metal"},{"z":57,"s":"La","n":"Lanthanum","p":6,"f":"Lanthanide"},{"z":58,"s":"Ce","n":"Cerium","p":6,"f":"Lanthanide"},{"z":59,"s":"Pr","n":"Praseodymium","p":6,"f":"Lanthanide"},{"z":60,"s":"Nd","n":"Neodymium","p":6,"f":"Lanthanide"},{"z":61,"s":"Pm","n":"Promethium","p":6,"f":"Lanthanide"},{"z":62,"s":"Sm","n":"Samarium","p":6,"f":"Lanthanide"},{"z":63,"s":"Eu","n":"Europium","p":6,"f":"Lanthanide"},{"z":64,"s":"Gd","n":"Gadolinium","p":6,"f":"Lanthanide"},{"z":65,"s":"Tb","n":"Terbium","p":6,"f":"Lanthanide"},{"z":66,"s":"Dy","n":"Dysprosium","p":6,"f":"Lanthanide"},{"z":67,"s":"Ho","n":"Holmium","p":6,"f":"Lanthanide"},{"z":68,"s":"Er","n":"Erbium","p":6,"f":"Lanthanide"},{"z":69,"s":"Tm","n":"Thulium","p":6,"f":"Lanthanide"},{"z":70,"s":"Yb","n":"Ytterbium","p":6,"f":"Lanthanide"},{"z":71,"s":"Lu","n":"Lutetium","p":6,"f":"Lanthanide"},{"z":72,"s":"Hf","n":"Hafnium","p":6,"f":"Transition metal"},{"z":73,"s":"Ta","n":"Tantalum","p":6,"f":"Transition metal"},{"z":74,"s":"W","n":"Tungsten","p":6,"f":"Transition metal"},{"z":75,"s":"Re","n":"Rhenium","p":6,"f":"Transition metal"},{"z":76,"s":"Os","n":"Osmium","p":6,"f":"Transition metal"},{"z":77,"s":"Ir","n":"Iridium","p":6,"f":"Transition metal"},{"z":78,"s":"Pt","n":"Platinum","p":6,"f":"Transition metal"},{"z":79,"s":"Au","n":"Gold","p":6,"f":"Transition metal"},{"z":80,"s":"Hg","n":"Mercury","p":6,"f":"Transition metal"},{"z":81,"s":"Tl","n":"Thallium","p":6,"f":"Post-transition metal"},{"z":82,"s":"Pb","n":"Lead","p":6,"f":"Post-transition metal"},{"z":83,"s":"Bi","n":"Bismuth","p":6,"f":"Post-transition metal"},{"z":84,"s":"Po","n":"Polonium","p":6,"f":"Metalloid"},{"z":85,"s":"At","n":"Astatine","p":6,"f":"Halogen"},{"z":86,"s":"Rn","n":"Radon","p":6,"f":"Noble gas"}];
+    const $ = id => document.getElementById(id);
+    const roundNames = {
+      'mixed':'Mixed Challenge','name-symbol':'Name → Symbol','symbol-name':'Symbol → Name',
+      'number-element':'Atomic Number → Symbol + Name','triple':'Triple Challenge','family':'Element → Family'
+    };
+    let teams = [], deck = [], index = 0, activeTeam = 0, currentMode = 'mixed', revealed = false, selectedRange = 'first';
+    const shuffle = a => {
+      const copy = [...a];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    };
+    const randomMode = () => ['name-symbol','symbol-name','number-element','triple','family'][Math.floor(Math.random()*5)];
+    function renderScores() {
+      $('scoreboard').innerHTML = teams.map((t,i) => `
+        <div class="team ${i===activeTeam?'active':''}" data-team="${i}">
+          <div class="team-name-display">${escapeHTML(t.name)}</div>
+          <span class="score">${t.score}</span>
+          <span class="streak">streak: ${t.streak}</span>
+        </div>`).join('');
+      document.querySelectorAll('.team').forEach(el => el.addEventListener('click', () => {
+        activeTeam = Number(el.dataset.team); renderScores();
+      }));
+    }
+    function escapeHTML(v) { const d=document.createElement('div'); d.textContent=v; return d.innerHTML; }
+    function makePrompt(el, mode) {
+      if (mode === 'name-symbol') return {q:el.n, i:'Give the chemical symbol.', a:`${el.s}`};
+      if (mode === 'symbol-name') return {q:el.s, i:'Give the element name in English.', a:`${el.n}`};
+      if (mode === 'number-element') return {q:el.z, i:'Give the symbol and the element name.', a:`${el.s} · ${el.n}`};
+      if (mode === 'family') return {q:el.n, i:'Name its family in English.', a:el.f};
+      const clue = Math.floor(Math.random()*3);
+      if (clue === 0) return {q:el.z, i:'Give the symbol and the element name.', a:`${el.s} · ${el.n}`};
+      if (clue === 1) return {q:el.s, i:'Give the atomic number and the element name.', a:`${el.z} · ${el.n}`};
+      return {q:el.n, i:'Give the atomic number and the symbol.', a:`${el.z} · ${el.s}`};
+    }
+    function showQuestion() {
+      if (index >= deck.length) return finish();
+      revealed = false;
+      const mode = currentMode === 'mixed' ? randomMode() : currentMode;
+      const p = makePrompt(deck[index], mode);
+      $('roundLabel').textContent = roundNames[mode];
+      $('question').textContent = p.q;
+      $('instruction').textContent = p.i;
+      $('answer').textContent = p.a;
+      $('answer').classList.remove('show');
+      $('revealBtn').style.display = '';
+      document.querySelectorAll('.judgement').forEach(b => b.classList.remove('show'));
+      $('skipBtn').style.display = '';
+      $('currentNumber').textContent = index + 1;
+      $('totalNumber').textContent = deck.length;
+      $('progressFill').style.width = `${(index/deck.length)*100}%`;
+      $('bonusNote').textContent = '';
+      renderScores();
+    }
+    function nextQuestion(wasCorrect) {
+      if (wasCorrect) {
+        teams[activeTeam].score++;
+        teams[activeTeam].streak++;
+        if (teams[activeTeam].streak % 3 === 0) {
+          teams[activeTeam].score++;
+          $('bonusNote').textContent = `★ ${teams[activeTeam].name}: streak bonus!`;
+        }
+      } else {
+        teams[activeTeam].streak = 0;
+      }
+      index++;
+      activeTeam = (activeTeam + 1) % teams.length;
+      renderScores();
+      setTimeout(showQuestion, $('bonusNote').textContent ? 650 : 160);
+    }
+    function finish() {
+      $('progressFill').style.width = '100%';
+      const max = Math.max(...teams.map(t => t.score));
+      const winners = teams.filter(t => t.score === max).map(t => t.name);
+      $('winnerText').textContent = winners.length === 1 ? `${winners[0]} wins!` : `Tie: ${winners.join(' & ')}`;
+      $('finalScores').innerHTML = [...teams].sort((a,b)=>b.score-a.score).map(t => `<div><strong>${escapeHTML(t.name)}</strong> — ${t.score} point${t.score===1?'':'s'}</div>`).join('');
+      $('endModal').classList.add('open');
+    }
+    function startGame() {
+      const names = [...document.querySelectorAll('.team-name')].map((x,i)=>x.value.trim() || `Team ${i+1}`);
+      teams = names.map(name => ({name,score:0,streak:0}));
+      currentMode = $('roundSelect').value;
+      const pool = elements.filter(e => selectedRange === 'first' ? e.p <= 3 : selectedRange === 'next' ? e.p >= 4 : true);
+      const requested = $('questionCount').value;
+      const total = requested === 'all' ? pool.length : Number(requested);
+      deck = shuffle(pool).slice(0,total);
+      index = 0; activeTeam = 0;
+      $('setup').classList.add('off'); $('game').classList.add('on');
+      showQuestion();
+    }
+    document.querySelectorAll('[data-range]').forEach(button => button.addEventListener('click', () => {
+      selectedRange = button.dataset.range;
+      document.querySelectorAll('[data-range]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+      const count = selectedRange === 'first' ? 18 : selectedRange === 'next' ? 68 : 86;
+      $('rangeHint').textContent = `Questions drawn from ${count} elements in the selected periods. Each element appears at most once per game.`;
+      $('allCount').textContent = `All ${count} elements · long round`;
+    }));
+    $('startBtn').addEventListener('click', startGame);
+    $('revealBtn').addEventListener('click', () => {
+      if (revealed) return; revealed = true;
+      $('answer').classList.add('show'); $('revealBtn').style.display = 'none';
+      document.querySelectorAll('.judgement').forEach(b => b.classList.add('show'));
+      $('skipBtn').style.display = 'none';
+    });
+    $('correctBtn').addEventListener('click', () => nextQuestion(true));
+    $('wrongBtn').addEventListener('click', () => nextQuestion(false));
+    $('skipBtn').addEventListener('click', () => nextQuestion(false));
+    $('changeTeamBtn').addEventListener('click', () => { activeTeam=(activeTeam+1)%teams.length; renderScores(); });
+    $('newGameBtn').addEventListener('click', () => { $('game').classList.remove('on'); $('setup').classList.remove('off'); });
+    $('playAgainBtn').addEventListener('click', () => { $('endModal').classList.remove('open'); $('game').classList.remove('on'); $('setup').classList.remove('off'); });
+    $('helpBtn').addEventListener('click', () => $('helpModal').classList.add('open'));
+    document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => $(b.dataset.close).classList.remove('open')));
+    $('fullBtn').addEventListener('click', async () => {
+      try {
+        if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
+        else await document.exitFullscreen();
+      } catch (_) { window.scrollTo({top:0,behavior:'smooth'}); }
+    });
+    document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if(e.target===m && m.id!=='endModal') m.classList.remove('open'); }));
+  })();
+  </script>
+</body>
+</html>
